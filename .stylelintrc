@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-rational-order",
+    "stylelint-config-prettier"
+  ],
+  "rules": {},
+  "overrides": [
+    {
+      "customSyntax": "@stylelint/postcss-css-in-js",
+      "files": ["**/*.tsx"],
+      "rules": {
+        "no-empty-first-line": null,
+        "value-keyword-case": null,
+        "function-no-unknown": null
+      }
+    }
+  ]
+}
