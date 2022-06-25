@@ -8,14 +8,14 @@ type ParamType = string | Date | number | boolean | null | undefined;
 export default function usePageQuery<P extends Record<keyof P, ParamType> & { total: number }, R>(
   fetcher: (args: P) => Promise<Page<R>>,
   variables: Omit<P, 'total'>,
-  options: { fetchKey?: string | number | null },
+  options?: { fetchKey?: string | number | null },
 ): {
   loading: boolean;
   error?: Error;
   data?: Page<R>;
   refresh: () => void;
 } {
-  const { fetchKey } = options;
+  const fetchKey = options?.fetchKey;
   const hash = JSON.stringify(variables);
   const [state, dispatch] = React.useReducer<
     React.Reducer<QueryState<Page<R>>, QueryAction<Page<R>>>

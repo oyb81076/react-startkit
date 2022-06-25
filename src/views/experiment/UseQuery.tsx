@@ -17,7 +17,7 @@ const getUserList = () => httpClient.get<User[]>('/api/users').then(thenDelay(de
 
 export default function UseQuery(): React.ReactElement | null {
   const { state } = useLocation();
-  const { data, loading, error, refresh } = useQuery(getUserList, {
+  const { data, loading, error, refresh } = useQuery(getUserList, null, {
     defaultValue: state as User[],
   });
   return (
