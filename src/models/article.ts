@@ -1,3 +1,7 @@
+import { date, number, object, string } from 'yup';
+
+import { enumValues } from 'src/modules/enums';
+
 export interface Article {
   id: string;
   nail: string;
@@ -15,6 +19,18 @@ export enum ArticleStatus {
   EXAMINE = 1,
   PUBLIC = 2,
 }
+
+export const articleValidation = object({
+  id: string().nullable(),
+  nail: string().url(),
+  title: string().max(255).required(),
+  status: number().integer().oneOf(enumValues(ArticleStatus)),
+  authorId: string().nullable(),
+  description: string(),
+  ctime: date(),
+  price: number().integer().required(),
+  sales: number().integer().required(),
+});
 
 export const StatusNames: Record<ArticleStatus, string> = {
   [ArticleStatus.PRIVATE]: '私人的',

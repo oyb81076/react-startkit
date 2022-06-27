@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Loading from 'src/components/Loading';
 import Pagination from 'src/components/Pagination/Pagination';
@@ -28,6 +29,7 @@ export default function ArticlePage(): React.ReactElement | null {
       <ArticleNavForm />
       <ArticleNavFormik />
       <ArticleNavUseFormik />
+      <Link to="create">新建</Link>
       <Loading loading={loading} error={error} refresh={refresh}>
         <ArticleTable rows={data?.rows} />
         <Pagination total={data?.total} size={10} />

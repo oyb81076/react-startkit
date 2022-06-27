@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
+import { setLocale } from 'yup';
 
 import App from './App';
+import locales from './locales/yup';
 import reportWebVitals from './reportWebVitals';
 
 import './index.css';
+
+setLocale(locales);
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

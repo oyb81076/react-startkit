@@ -10,6 +10,7 @@
       "customSyntax": "@stylelint/postcss-css-in-js",
       "files": ["**/*.tsx"],
       "rules": {
+        "no-empty-source": null,
         "no-empty-first-line": null,
         "value-keyword-case": null,
         "function-no-unknown": null

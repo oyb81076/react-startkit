@@ -43,7 +43,7 @@ export default function ArticleTable({ rows }: Props): React.ReactElement | null
               <DateFormat value={x.ctime} />
             </td>
             <td>
-              <Link to={x.id}>详情</Link>
+              <Link to={`detail/${x.id}`}>详情</Link>
             </td>
           </tr>
         ))}

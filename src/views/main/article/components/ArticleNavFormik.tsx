@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, Form, Formik, FormikProps } from 'formik';
+import * as Yup from 'yup';
 
 import SelectEnum from 'src/components/formik/SelectEnum';
 import useSearch from 'src/hooks/useSearch';
@@ -25,6 +26,10 @@ function ArticleNavFormik(): React.ReactElement | null {
         title: search.str('title'),
         status: search.enum('status', ArticleStatus),
       }}
+      validationSchema={Yup.object({
+        title: Yup.string().nullable(),
+        status: Yup.number().nullable(),
+      })}
       onSubmit={search.navigate}
     >
       <Form>

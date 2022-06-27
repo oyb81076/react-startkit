@@ -17,7 +17,7 @@ export function getArticlePage(params: GetPageInput): Promise<Page<Article>> {
   return httpClient.get('/api/article', params);
 }
 
-export function createArticle(body: Omit<Article, 'id' | 'ctime'>): Promise<Article> {
+export function createArticle(body: Article): Promise<Article> {
   return httpClient.post('/api/article', body);
 }
 
