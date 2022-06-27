@@ -1,12 +1,8 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
-import AppRoutes from './routes/AppRoutes';
+import AppRoutes from './views/AppRoutes';
 
 function App() {
-  return (
-    <Suspense fallback={<>Loading Component</>}>
-      <AppRoutes />
-    </Suspense>
-  );
+  return <AppRoutes />;
 }
 export default App;

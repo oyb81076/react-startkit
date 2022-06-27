@@ -14,6 +14,19 @@ export default function useSearch(): Search {
   return memorize;
 }
 
+export function useSearchNavigate() {
+  const { navigator } = React.useContext(UNSAFE_NavigationContext);
+  return React.useCallback(
+    (search: Record<string, string | null | number | Date | boolean | undefined>) => {
+      const entries = Object.entries(search)
+        .filter((x) => x[1] != null)
+        .map(([k, v]) => [k, v instanceof Date ? v.getTime().toString() : String(v)]);
+      navigator.push({ search: new URLSearchParams(entries).toString() });
+    },
+    [navigator],
+  );
+}
+
 const PAGE_NUM_PARAM = 'current';
 
 /**
@@ -107,12 +120,12 @@ class Search {
     return new SearchUpdater(this.params, this.navigator);
   }
 
-  navigate(search: Record<string, string | number | Date | boolean | null>) {
+  public navigate = (search: Record<string, string | number | Date | boolean | null>) => {
     const entries = Object.entries(search)
       .filter((x) => x[1] != null)
       .map(([k, v]) => [k, v instanceof Date ? v.getTime().toString() : String(v)]);
     this.navigator.push({ search: new URLSearchParams(entries).toString() });
-  }
+  };
 }
 
 class SearchUpdater {

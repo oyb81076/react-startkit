@@ -1,19 +1,17 @@
 import React from 'react';
 import useSWR from 'swr';
 
-import Loader from 'src/components/Loader';
+import Loader from 'src/components/Loading';
 import { User } from 'src/models';
-import httpClient from 'src/modules/httpClient';
-
-const getUserList = () => httpClient.request<User[]>({ method: 'GET', url: '/api/user' });
+import { getUsers } from 'src/services/userService';
 
 export default function SWR(): React.ReactElement | null {
-  const { data, isValidating, error, mutate } = useSWR<User[], Error>('/api/user', getUserList);
+  const { data, isValidating, error, mutate } = useSWR<User[], Error>('/api/user', getUsers);
   const refreshWithError = () => {
     mutate(() => Promise.reject(new Error('This is some error')), false).catch(() => {});
   };
   const refresh = () => {
-    mutate(getUserList, false).catch(() => {});
+    mutate(getUsers, false).catch(() => {});
   };
 
   return (

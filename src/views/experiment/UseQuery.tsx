@@ -1,10 +1,10 @@
 import React from 'react';
 import { useLocation } from 'react-router';
 
-import Loader from 'src/components/Loader';
+import Loading from 'src/components/Loading';
 import useQuery from 'src/hooks/useQuery';
 import { User } from 'src/models';
-import httpClient from 'src/modules/httpClient';
+import { getUsers } from 'src/services/userService';
 
 let delay = 0;
 function thenDelay<T>(ms: number): (v: T) => Promise<T> {
@@ -13,15 +13,15 @@ function thenDelay<T>(ms: number): (v: T) => Promise<T> {
       setTimeout(() => r(v), ms);
     });
 }
-const getUserList = () => httpClient.get<User[]>('/api/users').then(thenDelay(delay));
+const getUserListDelay = () => getUsers().then(thenDelay(delay));
 
 export default function UseQuery(): React.ReactElement | null {
   const { state } = useLocation();
-  const { data, loading, error, refresh } = useQuery(getUserList, null, {
+  const { data, loading, error, refresh } = useQuery(getUserListDelay, null, {
     defaultValue: state as User[],
   });
   return (
-    <Loader loading={loading} error={error}>
+    <Loading loading={loading} error={error}>
       {data?.map((x) => (
         <div key={x.id}>
           <span>{x.id}</span>
@@ -47,6 +47,6 @@ export default function UseQuery(): React.ReactElement | null {
       >
         刷新延迟获取数据
       </button>
-    </Loader>
+    </Loading>
   );
 }

@@ -1,6 +1,7 @@
 import { Random } from 'mockjs';
 
-import { Article, ArticleStatus, Role, User } from '../src/models';
+import { Role, User } from '../src/models';
+import { Article, ArticleStatus } from '../src/models/article';
 import { randomEnum, uuid } from './utils';
 
 export const user = (): User => ({
